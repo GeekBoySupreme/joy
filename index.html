@@ -1,0 +1,138 @@
+<HTML>
+<HEAD>
+	<TITLE>Joy (joybot.js)</TITLE>
+	<style>
+	H2{color:orange;}
+	#text{
+	font-size:16px;
+	font-family:Segoe UI;
+	border-radius:50px;
+	border:none;
+	color:white;
+	background-color:rgb(0,54,100);
+	padding:10px;
+	padding-right:20px;
+	padding-left:20px;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+	#taa{
+	padding-top:10px;
+	font-size:16px;
+	font-family:Segoe UI;
+	border-radius:3px;
+	border:none;
+	 box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	padding:10px;
+	}
+	#text:focus,#taa:focus{outline:none;}
+	#talk,#reset{
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	font-size:17px;
+	font-family:Segoe UI;
+	margin:2px;
+	border-radius:2px;
+	border:none;
+	color:rgb(0,111,221);
+	font-weight:50;
+	background-color:rgb(228,228,228);
+	padding:10px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}
+	#talk:focus,#reset:focus{outline:none;
+	}
+	#talk:hover,#reset:hover{box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}
+	</style>
+	<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" SRC="joybot.js"></SCRIPT>
+	<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" SRC="joydata.js"></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!--
+
+var joy = new JoyBot();
+var joyLines = new Array();
+
+var displayCols = 72;
+var displayRows = 20;
+
+function joyReset() {
+	joy.reset();
+	joyLines.length = 0;
+	joyStep();
+}
+
+function joyStep() {
+	var f = document.forms.e_form;
+	var userinput = f.e_input.value;
+	if (joy.quit) {
+		f.e_input.value = '';
+		if (confirm("This session is over.\nStart again?")) joyReset();
+		f.e_input.focus();
+		return;
+	}
+	else if (userinput != '') {//modifying language engine
+		var usr = '    YOU  : '   + userinput;
+	var crap=joy.transform(userinput)
+		
+		var rpl ='    JOY   :  ' + crap;
+		var space='   ';
+		joyLines.push(usr);
+		joyLines.push(space);
+		joyLines.push(rpl);
+		joyLines.push(space);
+		// display nicely
+		// (fit to textarea with last line free - reserved for extra line caused by word wrap)
+		var temp  = new Array();
+		var l = 0;
+		for (var i=joyLines.length-1; i>=0; i--) {
+			l += 1 + Math.floor(joyLines[i].length/displayCols);
+			if (l >= displayRows) break
+			else temp.push(joyLines[i]);
+		}
+		joyLines = temp.reverse();
+		f.e_display.value = joyLines.join('\n');
+	}
+	else if (joyLines.length == 0) {
+		// no input and no saved lines -> output initial
+		var initial = '    JOY   :  ' + joy.getInitial();
+		var as=' ';
+		joyLines.push(as);
+		joyLines.push(initial);
+		joyLines.push(as);
+		f.e_display.value = initial + '\n';
+	}
+	f.e_input.value = '';
+	f.e_input.focus();
+}
+
+	
+	
+	
+	
+
+//-->
+</SCRIPT>
+</HEAD>
+
+<BODY TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" MARGINHEIGHT="0" MARGINWIDTH="0" STYLE="border:0" onload="window.setTimeout('joyReset()',100)"><A NAME="top"></A>
+
+<CENTER>
+<P>&nbsp;</P>
+
+<TABLE BORDER="0" CELLSPACING="10" CELLPADDING="0">
+<FORM NAME="e_form" onsubmit="joyStep();return false">
+<TR><TD COLSPAN="2"><TEXTAREA NAME="e_display" COLS="74" ROWS="20" id="taa"></TEXTAREA></TD></TR>
+<TR VALIGN="middle"><img src="joy.png"/>
+	<TD><INPUT TYPE="text" NAME="e_input" id="text" SIZE="50"></TD>
+	<TD ALIGN="right"><button TYPE="submit"  id="talk">Talk</button> <button TYPE="reset" id="reset"  onClick="window.setTimeout('joyReset()',100)">Reset</button></TD>
+</TR>
+</FORM>
+</TABLE>
+</CENTER>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<TABLE BORDER="0" CELLSPACING="12" CELLPADDDING="0">
+
+</TABLE>
+
+</BODY>
+</HTML>
