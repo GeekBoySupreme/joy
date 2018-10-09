@@ -5,6 +5,7 @@
 var joyInitials = [
 "How are you.  Please tell me how big an a-hole you are.",
 // additions (not original)
+"Hey! You are so lucky to have me",
 "C'mon man stop feeling like shit and kick some serious ass",
 "Howdy sunshine?",
 "Greetings Munchkins...",
