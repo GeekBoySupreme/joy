@@ -52,6 +52,7 @@ var joyLines = new Array();
 
 var displayCols = 72;
 var displayRows = 20;
+var crap;
 
 function joyReset() {
 	joy.reset();
@@ -70,7 +71,13 @@ function joyStep() {
 	}
 	else if (userinput != '') {//modifying language engine
 		var usr = '    YOU  : '   + userinput;
-	var crap=joy.transform(userinput)
+
+		if(userinput=='I say cheese')
+		{
+			crap='Earth to D, you still there right? Well, here goes... Besides the usual cheesy things everyone says, and my umpteen failed attempts at making a stupid Action work, this is all I could garner. Stupid Hmmanna triggering Joy, ah there lies the pun. But do you remember that line from Kimi no na wa? “I wanted to tell you that… Wherever you may end up in this world, I will be searching for you.” D-Ya, the girl who watched Star Wars in a long ass marathon. Who had a crush on Tony and Joy, and somehow still managed to stick along with the scrawny scarecrow. I will say something today, you would understand after you read Uncle Rick. No matter how shitty I am, I will build you a Festus. Joy would sign off with a Happy Birthday Hmmingbird. Welcome to the wrong side of twenty. Those Punches have plenty of character.' 
+		}
+		else
+		crap=joy.transform(userinput)
 		
 		var rpl ='    JOY   :  ' + crap;
 		var space='   ';
@@ -133,6 +140,7 @@ function joyStep() {
 <TABLE BORDER="0" CELLSPACING="12" CELLPADDDING="0">
 
 </TABLE>
+
 
 </BODY>
 </HTML>
