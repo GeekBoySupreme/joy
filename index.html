@@ -63,7 +63,8 @@ function joyReset() {
 function joyStep() {
 	var f = document.forms.e_form;
 	var userinput = f.e_input.value;
-	if (joy.quit) {
+	if (joy.quit) 
+	{
 		f.e_input.value = '';
 		if (confirm("This session is over.\nStart again?")) joyReset();
 		f.e_input.focus();
